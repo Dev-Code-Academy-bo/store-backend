@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Dev-Code-Academy-bo/store-backend/issues"
   },
-  "homepage": "https://github.com/Dev-Code-Academy-bo/store-backend#readme"
+  "homepage": "https://github.com/Dev-Code-Academy-bo/store-backend#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
