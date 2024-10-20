@@ -17,12 +17,14 @@ async function getById (req, res) {
   return res.status(200).json(userFound);
 }
 
-function update () {
-
+async function update (req, res) {
+  const user = await userModel.put(req.params.id, req.body);
+  return res.status(200).json(user);
 }
 
-function remove () {
-
+async function remove (req, res) {
+  const user = await userModel.remove(req.params.id);
+  return res.status(200).json(user);
 }
 
 module.exports = {

@@ -12,6 +12,8 @@ router
     userController.save
   )
   .get('/', userController.get)
-  .get('/:id', userController.getById);
+  .get('/:id', userController.getById)
+  .put('/:id', userController.update)
+  .delete('/:id', userController.remove);
 
   module.exports = router;
