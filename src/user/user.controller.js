@@ -2,8 +2,8 @@
 const userModel = require('./user.model');
 
 async function save (req, res) {
-  const newUser = req.body;
-  const userSaved = await userModel.save(newUser);
+  req.body.photo = await `photos/${req.file.filename}`
+  const userSaved = await userModel.save(req.body);
   return res.status(200).json(userSaved);
 }
 

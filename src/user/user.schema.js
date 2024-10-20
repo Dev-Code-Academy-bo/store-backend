@@ -13,6 +13,7 @@ let userSchema = new Schema({
   phone: String,
   address: String,
   birthdate: {type: Date },
+  photo: String,
 } , {
   versionKey: false
 });
