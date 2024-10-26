@@ -8,15 +8,15 @@ const Product = sequelize.define( 'Product', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastname: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   details: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  category: {
     type: DataTypes.STRING,
     allowNull: false,
   },
