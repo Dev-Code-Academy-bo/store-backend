@@ -2,29 +2,49 @@
 const model = require('./product.model');
 
 async function save (req, res) {
-  req.body.image = await `photos/${req.file.filename}`
-  const productSaved = await model.save(req.body);
-  return res.status(200).json(productSaved);
+  try {
+    req.body.image = await `photos/${req.file.filename}`
+    const productSaved = await model.save(req.body);
+    return res.status(200).json(productSaved);
+  }  catch(error) {
+    return res.status(error.status).json(error.body);
+  }
 }
 
 async function get (req, res) {
-  const product = await model.getAll();
-  return res.status(200).json(product);
+  try {
+    const product = await model.getAll();
+    return res.status(200).json(product);
+  } catch(error) {
+    return res.status(error.status).json(error.body);
+  }
 }
 
 async function getById (req, res) {
-  const productFound = await model.getById(req.params.id);
-  return res.status(200).json(productFound);
+  try {
+    const productFound = await model.getById(req.params.id);
+    return res.status(200).json(productFound);
+  } catch(error) {
+    return res.status(error.status).json(error.body);
+  }
 }
 
 async function update (req, res) {
-  const product = await model.put(req.params.id, req.body);
-  return res.status(200).json(product);
+  try {
+    const product = await model.put(req.params.id, req.body);
+    return res.status(200).json(product);
+  } catch(error) {
+    return res.status(error.status).json(error.body);
+  }
 }
 
 async function remove (req, res) {
-  const product = await model.remove(req.params.id);
-  return res.status(200).json(product);
+  try {
+    const product = await model.remove(req.params.id);
+    return res.status(200).json(product);
+  }  catch(error) {
+    return res.status(error.status).json(error.body);
+  }
 }
 
 module.exports = {
