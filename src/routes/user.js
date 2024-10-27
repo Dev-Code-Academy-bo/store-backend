@@ -3,12 +3,14 @@
 const express = require('express');
 const userController = require('../user/user.controller');
 const userMiddleware = require('../user/user.middleware');
+const middleware = require('../commons/middleware');
 
 const router = express.Router();
 
 router
   .post('/', 
     userMiddleware.upload.single('photo'),
+    middleware.encrypt,
     userController.save
   )
   .get('/', userController.get)
