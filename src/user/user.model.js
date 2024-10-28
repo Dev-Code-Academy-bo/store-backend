@@ -22,10 +22,15 @@ function remove(id) {
   return db.remove(id);
 }
 
+function findByUsername(data) {
+  return db.find({ username: data })
+}
+
 module.exports = {
   save,
   getAll,
   getById,
   put,
   remove,
+  findByUsername,
 }
