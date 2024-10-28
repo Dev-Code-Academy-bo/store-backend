@@ -39,6 +39,13 @@ let build = (errorName, error) => {
         message: error.message
       };
       break;
+    case 'no token':
+      status = 401;
+      body = {
+        name: error.name,
+        message: error.message
+      };
+      break;
     case 'configure-status':
       status = error.status;
       body = {
