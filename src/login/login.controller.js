@@ -42,7 +42,7 @@ function createToken() {
   const token = jwt.sign(
     { course: COURSE },
     KEY,
-    { expiresIn: 60*2 }
+    { expiresIn: 60*5 }
 
   );
   return token;

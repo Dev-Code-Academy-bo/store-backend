@@ -13,9 +13,9 @@ async function save (data) {
   }
 }
 
-async function get () {
+async function get (data) {
   try{
-    return await Product.findAll();
+    return await data ? Product.findAll(data) : Product.findAll();
   } catch (error){
     throw errorBuilder.build(MYSQL, error);
   }
