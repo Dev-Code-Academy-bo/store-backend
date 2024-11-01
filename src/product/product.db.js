@@ -55,7 +55,7 @@ async function put(id, data) {
     throw err;
   } catch (error) {
     if (error.status === 404)
-      throw err;
+      throw error;
     throw errorBuilder.build(MYSQL, error);
   }
 }

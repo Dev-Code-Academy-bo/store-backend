@@ -19,8 +19,6 @@ async function get (req, res) {
     for (const key in req.query)
       if (key !== 'token')
         QUERY.push(key);
-
-   console.log('QUERY', QUERY)
     let product;
     switch (QUERY[0]) {
       case NAME : product = await model.getByName(req.query[NAME]);

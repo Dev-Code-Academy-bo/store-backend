@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const schema =  require('./user.schema');
+const errorBuilder = require('../commons/error-builder');
 
 const DOCUMENT = 'user';
 const MONGOOSE = 'mongoose';
