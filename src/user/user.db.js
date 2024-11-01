@@ -25,7 +25,22 @@ async function get () {
 }
 
 async function getById(id) {
-  return await user.findById(id);
+  try {
+    const res = await user.findById(id);
+    if (res)
+      return res;
+    throw errorBuilder.build(
+      'configure-status',
+      {
+        name: 'database - findById', 
+        message: 'not found speciality id', 
+        status: 404
+      });
+  } catch (error) {
+    if (error.status === 404)
+      throw error;
+    throw errorBuilder.build(MONGOOSE, error);
+  }
 }
 
 async function find(data) {
@@ -36,12 +51,45 @@ async function find(data) {
   }
 }
 async function put(id, data) {
-  const response = await user.replaceOne({ _id: id }, data);
-  return getById(id);
+  try {
+    const result = await user.replaceOne({ _id: id }, data);
+    if (result.n === 0) {
+      const err = errorBuilder.build(
+        'configure-status',
+        {
+          name: 'database - update',
+          message: 'not found user id',
+          status: 404
+        });
+      throw err;
+    }
+    return getById(id);
+  } catch (error) {
+    if (error.status === 404)
+      throw error;
+    throw errorBuilder.build(MONGOOSE, error);
+  }
 }
 
 async function remove(id) {
-  return await user.findOneAndDelete( { _id: id } );
+  try {
+    const res = await user.findById(id);
+    if (res) {
+      await user.findOneAndDelete({_id: id });
+      return res;
+    }
+    throw errorBuilder.build(
+      'configure-status',
+      {
+        name: 'database - delete',
+        message: 'not found user id',
+        status: 404
+      });
+  } catch (error) {
+    if (error.status === 404)
+      throw error;
+    throw errorBuilder.build(MONGOOSE, error);
+  }
 }
 module.exports = {
   save,
