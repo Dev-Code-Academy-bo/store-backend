@@ -1,6 +1,8 @@
 'use strict';
 const model = require('./product.model');
 
+const NAME = 'name';
+
 async function save (req, res) {
   try {
     req.body.image = await `photos/${req.file.filename}`
@@ -13,7 +15,17 @@ async function save (req, res) {
 
 async function get (req, res) {
   try {
-    const product = await model.getAll();
+    const QUERY = [];
+    for (const key in req.query)
+      if (key !== 'token')
+        QUERY.push(key);
+    let product;
+    switch (QUERY[0]) {
+      case NAME : product = await model.getByName(req.query[NAME]);
+        break;
+      default : product = await model.getAll();
+        break;
+    }
     return res.status(200).json(product);
   } catch(error) {
     return res.status(error.status).json(error.body);

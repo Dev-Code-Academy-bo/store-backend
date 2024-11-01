@@ -1,6 +1,8 @@
 'use strict';
 
+const { Op } = require("sequelize");
 const db = require('./product.db');
+
 
 function save (user) {
   return db.save(user);
@@ -12,6 +14,17 @@ function getAll () {
 
 function getById(id) {
   return db.getById(id);
+}
+
+function getByName(name) {
+  const data = {
+    where: {
+      name: {
+        [Op.like]: `%${name}%`
+      }
+    }
+  }
+  return db.get(data);
 }
 
 function put (id, data) {
@@ -26,6 +39,7 @@ module.exports = {
   save,
   getAll,
   getById,
+  getByName,
   put,
   remove,
 }
